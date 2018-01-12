@@ -72,7 +72,7 @@
         img.src = bgImg;
         img.onload = function () {
           var style = document.createElement('style');
-          style.textContent = 'body { cursor: url(' + bgImg + '), default;}.mouse { width: ' + img.width + '; height: ' + img.height + '; background-image: url(' + bgImg + ');}';
+          style.textContent = 'body { cursor: url(' + bgImg + '), default;}.mouse { width: ' + img.width + 'px; height: ' + img.height + 'px; background-image: url(' + bgImg + ');}';
           width = img.width;
           height = img.height;
           document.head.appendChild(style);
