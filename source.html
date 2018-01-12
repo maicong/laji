@@ -1,0 +1,97 @@
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>←_← →_→</title>
+  <style>
+    body {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: url('laji.png'), default;
+      margin: 0;
+    }
+
+    .mouse {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      background: url('laji.png') center right no-repeat;
+      transition: transform 2s ease-in-out;
+    }
+
+  </style>
+</head>
+
+<body>
+  <script>
+    (() => {
+      const length = parseInt(_('n')) || 999
+      const timeout = parseInt(_('t')) || 25
+      const bgImg = _('b')
+      let height = 36
+      let width = 36
+      let index = 0
+
+      function _(key) {
+        let result = null
+        let tmp = []
+        location.search.substr(1).split('&').forEach(v => {
+          tmp = v.split('=')
+          if (tmp[0] === key) {
+            result = decodeURIComponent(tmp[1])
+          }
+        })
+        return result
+      }
+
+      function update(element) {
+        const cW = document.body.clientWidth / 2 - width
+        const cH = document.body.clientHeight / 2 - height
+        const mL = Math.floor(Math.random() * (cW * 2 + 1) - cW)
+        const mT = Math.floor(Math.random() * (cH * 2 + 1) - cH)
+        element.style.transform = `translate(${mL}px, ${mT}px)`
+      }
+
+      if (bgImg) {
+        const img = new Image()
+        img.src = bgImg
+        img.onload = () => {
+          const style = document.createElement('style')
+          style.textContent = `
+            body {
+              cursor: url(${bgImg}), default;
+            }
+            .mouse {
+              width: ${img.width};
+              height: ${img.height};
+              background-image: url(${bgImg});
+            }
+          `
+          width = img.width
+          height = img.height
+          document.head.appendChild(style)
+        }
+      }
+
+      for (; index < length; index++) {
+        const $mouse = document.createElement('div')
+        $mouse.classList = 'mouse'
+        $mouse.addEventListener('transitionend', () => {
+          update($mouse)
+        }, false)
+        setTimeout(() => {
+          document.body.appendChild($mouse)
+          update($mouse)
+        }, index * timeout)
+      }
+    })()
+  </script>
+</body>
+
+</html>
+
+<!-- © maicong.me 2018.01.12 -->

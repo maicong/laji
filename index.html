@@ -1,0 +1,102 @@
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>←_← →_→</title>
+  <style>
+    body {
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      cursor: url('laji.png'), default;
+      margin: 0;
+    }
+
+    .mouse {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      background: url('laji.png') center right no-repeat;
+      -webkit-transition: -webkit-transform 2s ease-in-out;
+      transition: -webkit-transform 2s ease-in-out;
+      transition: transform 2s ease-in-out;
+      transition: transform 2s ease-in-out, -webkit-transform 2s ease-in-out;
+    }
+
+  </style>
+</head>
+
+<body>
+  <script>
+    'use strict';
+    (function () {
+      var length = parseInt(_('n')) || 999;
+      var timeout = parseInt(_('t')) || 25;
+      var bgImg = _('b');
+      var height = 36;
+      var width = 36;
+      var index = 0;
+
+      function _(key) {
+        var result = null;
+        var tmp = [];
+        location.search.substr(1).split('&').forEach(function (v) {
+          tmp = v.split('=');
+          if (tmp[0] === key) {
+            result = decodeURIComponent(tmp[1]);
+          }
+        });
+        return result;
+      }
+
+      function update(element) {
+        var cW = document.body.clientWidth / 2 - width;
+        var cH = document.body.clientHeight / 2 - height;
+        var mL = Math.floor(Math.random() * (cW * 2 + 1) - cW);
+        var mT = Math.floor(Math.random() * (cH * 2 + 1) - cH);
+        element.style.transform = 'translate(' + mL + 'px, ' + mT + 'px)';
+      }
+
+      if (bgImg) {
+        var img = new Image();
+        img.src = bgImg;
+        img.onload = function () {
+          var style = document.createElement('style');
+          style.textContent = 'body { cursor: url(' + bgImg + '), default;}.mouse { width: ' + img.width + '; height: ' + img.height + '; background-image: url(' + bgImg + ');}';
+          width = img.width;
+          height = img.height;
+          document.head.appendChild(style);
+        };
+      }
+
+      var _loop = function _loop() {
+        var $mouse = document.createElement('div');
+        $mouse.classList = 'mouse';
+        $mouse.addEventListener('transitionend', function () {
+          update($mouse);
+        }, false);
+        setTimeout(function () {
+          document.body.appendChild($mouse);
+          update($mouse);
+        }, index * timeout);
+      };
+
+      for (; index < length; index++) {
+        _loop();
+      }
+    })();
+  </script>
+</body>
+
+</html>
+
+<!-- © maicong.me 2018.01.12 -->
