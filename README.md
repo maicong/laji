@@ -6,7 +6,7 @@
 
 默认口味: https://maicong.github.io/laji/index.html
 
-更换口味: https://maicong.github.io/laji/index.html?n=999&t=100&b=https://tb2.bdstatic.com/tb/editor/images/face/i_f28.png
+更换口味: https://maicong.github.io/laji/index.html?n=999&t=100&b=https%3A%2F%2Ftb2.bdstatic.com%2Ftb%2Feditor%2Fimages%2Fface%2Fi_f28.png
 
 ## 参数
 
