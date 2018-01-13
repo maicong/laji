@@ -18,8 +18,8 @@
 
     .mouse {
       position: absolute;
-      width: 36px;
-      height: 36px;
+      width: 30px;
+      height: 30px;
       background: url('laji.png') center right no-repeat;
       transition: transform 2s ease-in-out;
     }
@@ -30,11 +30,11 @@
 <body>
   <script>
     (() => {
-      const length = parseInt(_('n')) || 999
-      const timeout = parseInt(_('t')) || 25
+      const length = parseInt(_('n')) || 666
+      const timeout = parseInt(_('t')) || 50
       const bgImg = _('b')
-      let height = 36
-      let width = 36
+      let height = 30
+      let width = 30
       let index = 0
 
       function _(key) {
