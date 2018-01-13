@@ -83,6 +83,7 @@
       for (; index < length; index++) {
         const $mouse = document.createElement('div')
         $mouse.classList = 'mouse'
+        $mouse.style.transitionDelay = `${index * 25}ms`
         $mouse.addEventListener('transitionend', () => {
           update($mouse)
         }, false)
