@@ -50,8 +50,8 @@
       }
 
       function update(element) {
-        const cW = document.body.clientWidth / 2 - width
-        const cH = document.body.clientHeight / 2 - height
+        const cW = document.body.clientWidth / 2 - width / 2
+        const cH = document.body.clientHeight / 2 - height / 2
         const mL = Math.floor(Math.random() * (cW * 2 + 1) - cW)
         const mT = Math.floor(Math.random() * (cH * 2 + 1) - cH)
         element.style.transform = `translate(${mL}px, ${mT}px)`
@@ -62,18 +62,20 @@
         img.src = bgImg
         img.onload = () => {
           const style = document.createElement('style')
+
+          width = img.width
+          height = img.height
+
           style.textContent = `
             body {
               cursor: url(${bgImg}), default;
             }
             .mouse {
-              width: ${img.width}px;
-              height: ${img.height}px;
+              width: ${width}px;
+              height: ${height}px;
               background-image: url(${bgImg});
             }
           `
-          width = img.width
-          height = img.height
           document.head.appendChild(style)
         }
       }

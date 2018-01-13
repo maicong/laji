@@ -60,8 +60,8 @@
       }
 
       function update(element) {
-        var cW = document.body.clientWidth / 2 - width;
-        var cH = document.body.clientHeight / 2 - height;
+        var cW = document.body.clientWidth / 2 - width / 2;
+        var cH = document.body.clientHeight / 2 - height / 2;
         var mL = Math.floor(Math.random() * (cW * 2 + 1) - cW);
         var mT = Math.floor(Math.random() * (cH * 2 + 1) - cH);
         element.style.transform = 'translate(' + mL + 'px, ' + mT + 'px)';
@@ -72,9 +72,11 @@
         img.src = bgImg;
         img.onload = function () {
           var style = document.createElement('style');
-          style.textContent = 'body { cursor: url(' + bgImg + '), default;}.mouse { width: ' + img.width + 'px; height: ' + img.height + 'px; background-image: url(' + bgImg + ');}';
+
           width = img.width;
           height = img.height;
+
+          style.textContent = 'body { cursor: url(' + bgImg + '), default;}.mouse { width: ' + width + 'px; height: ' + height + 'px; background-image: url(' + bgImg + ');}';
           document.head.appendChild(style);
         };
       }
